@@ -1,0 +1,5 @@
+Nevezd át az index.html fájlt index.php-ra. Ezután a következő kódot illeszd be a fájlba:
+
+    Helló! Most <?php echo date('Y-m-d H:i:s'); ?> van.
+
+Nézd meg böngészőben, és `curl`-lal is.

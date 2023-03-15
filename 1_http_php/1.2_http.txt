@@ -1,0 +1,50 @@
+Egy Linux parancssorban add ki a következő parancsot:
+
+    host launchpad.hu
+
+Ez kiírja, hogy mi az IP címe a launchpad.hu-nak. Ezután csatlakozzunk ehhez a szerverhez a 80-as porton:
+
+    telnet 37.221.212.99 80
+
+és küldjük el neki a következő kérést (a NEVED helyére írd a mappa nevét):
+
+    GET /backend-edzes/NEVED/index.html HTTP/1.1
+    Host: launchpad.hu
+    
+és a végén egy üres sorral jelezzük, hogy vége a kérésnek. Ekkor a következőhöz hasonló választ fogjuk kapni:
+
+    HTTP/1.1 200 OK
+    Content-Type: text/html
+    Content-Length: 7
+    Last-Modified: Wed, 15 Mar 2023 07:43:55 GMT
+    ETag: "7-5f6eb819848b0"
+
+    Helló
+
+Az első sorban van a válaszkód (200 OK), majd különféle fejlécek, majd egy üres sor után a fájl tartalma.
+
+Most próbáld ki, hogy az útvonal /backend-edzes/NEVED/index.html helyett
+- /backend-edzes/NEVED/
+- /backend-edzes/NEVED
+
+legyen. Milyen választ kapsz?
+
+A második esetben 301 Moved Permanently választ kapunk, ami egy átirányítás. A Location headerben meg van
+adva, hogy milyen útvonalat kéne lekérni ehelyett.
+
+Próbálj meg megadni egy olyan útvonalat, ami nem létezik. Ilyenkor 404 Not Found választ kapunk, a
+válasz törzsében viszont elküldi az egész Wordpresses Launchpad honlapot, ami kiírja a hibaüzenetet
+(így van bekonfigurálva a szerver).
+
+
+Másold fel az ebben a mappában lévő smile.png fájlt a mappádba, és nézd meg böngészőben, hogy működik-e.
+Kérd le a fájl tartalmát a parancssorból, és nézd meg, hogy milyen Content-Type: fejlécet kapsz.
+
+Most hozz létre egy .txt fájlt a mappádban, és írj bele valamit. Ezt is kérd le parancssorból,
+és nézd meg, hogy milyen Content-Type: fejlécet kapsz.
+
+Könnyebben le lehet kérni a fájlt, ha a telnet helyett a curl parancsot használod:
+
+    curl -v http://launchpad.hu/backend-edzes/NEVED/index.html
+
+A -v azt jelenti, hogy több információt írjon ki, pl. a fejléceket.

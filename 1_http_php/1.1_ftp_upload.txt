@@ -1,0 +1,11 @@
+Helló! Üdv a Backend Edzésen!
+
+Jelentkezz be ftps-en az alábbi címre:
+ftps://backend-edzes%40launchpad.hu@launchpad.hu/
+A jelszót megkapjátok külön.
+
+Amit ebbe a mappába feltöltötök, az a https://launchpad.hu/backend-edzes/ címen lesz elérhető.
+
+Hozz létre egy mappát a saját neveddel, és tegyél bele egy index.html fájlt, amibe egyelőre csak egy "Helló" szöveget írj!
+Nézd meg a böngésződben, hogy működik-e
+(https://launchpad.hu/backend-edzes/NEVED/index.html vagy https://launchpad.hu/backend-edzes/NEVED/) 
