@@ -1,1 +1,6 @@
 node_modules
+
+db
+.parcel-cache
+
+dist
