@@ -4,9 +4,9 @@
 
 import { observer } from "mobx-react-lite";
 import { render } from "react-dom";
-import { Volunteer } from "./4.3_Volunteer";
-import "./4.4_volunteerStore";
-import { volunteerStore } from "./4.4_volunteerStore";
+import { Volunteer } from "../shared/entities/Volunteer";
+import "./volunteerStore";
+import { volunteerStore } from "./volunteerStore";
 
 const VolunteerList = observer(() => {
   const handleDelete = (volunteer: Volunteer) => {
@@ -17,7 +17,7 @@ const VolunteerList = observer(() => {
     <ul>
       {volunteerStore.volunteers.map((volunteer) => (
         <li>
-          {volunteer.name}
+          {volunteer.name}-{volunteer.phoneNumber}
           <button onClick={() => handleDelete(volunteer)}>×</button>
         </li>
       ))}

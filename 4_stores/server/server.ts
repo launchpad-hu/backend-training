@@ -3,7 +3,7 @@
 
 import express from "express";
 import { remultExpress } from "remult/remult-express";
-import { Volunteer } from "./4.3_Volunteer";
+import { Volunteer } from "../shared/entities/Volunteer";
 
 const app = express();
 app.use(

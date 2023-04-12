@@ -4,3 +4,9 @@ Kicsit körülményes, mert külön el kell indítani a frontend és a backendet
 
 Hozz létre egy package.json-t a 4_stores-ban (`pnpm init`), és hozz létre benne egy `dev` szkriptet,
 ami párhuzamosan elindítja a frontendet és a backendet! (`&` jellel lehet Bashben)
+
+Használj a dev scirpt-hez concurrently-t:
+    pnpm add -D concurrently
+
+és ez legyen a dev script 
+    concurrently -k -n 'server,frontend' -c 'bgBlue.bold,bgGreen.bold' 'node --watch --loader=ts-node/esm 4.2_server.ts' 'vite --host' 

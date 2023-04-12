@@ -1,0 +1,17 @@
+{
+  "name": "4_stores",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently -k -n 'server,frontend' -c 'bgBlue.bold,bgGreen.bold' 'node --watch --loader=ts-node/esm server/server.ts' 'vite --host' ",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.0.1",
+    "vite": "^4.2.1"
+  }
+}

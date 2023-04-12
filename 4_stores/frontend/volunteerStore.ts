@@ -1,6 +1,6 @@
 import { makeAutoObservable } from "mobx";
 import { remult } from "remult";
-import { Volunteer } from "./4.3_Volunteer";
+import { Volunteer } from "../shared/entities/Volunteer";
 
 class VolunteerStore {
   volunteers: Volunteer[] = [];
