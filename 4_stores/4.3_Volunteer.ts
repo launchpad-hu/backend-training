@@ -1,3 +1,13 @@
-import { Entity } from "remult";
+import { Entity, Fields } from "remult";
 
-export class Volunteer {}
+@Entity('volunteer', {
+    allowApiCrud: true
+})
+export class Volunteer {
+   @Fields.string()
+   name!: string
+
+   @Fields.string()
+   phoneNumber!: string
+}
+    
