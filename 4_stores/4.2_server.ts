@@ -1,3 +1,4 @@
+// cd 4_stores && node --watch --loader=ts-node/esm 4.2_server.ts
 // Készíts el egy Remult + express szervert!
 
 import express from "express";

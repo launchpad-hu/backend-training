@@ -1,0 +1,3 @@
+Számon kell tartani, hogy melyik önkéntes mikor vett részt önkéntességen. Hozz
+létre egy Participation entityt, és kezeld a felületen önkéntesenként a
+részvételeket.

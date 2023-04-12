@@ -1,0 +1,6 @@
+Indítsd el a 4_stores mappában lévő alkalmazást, amit legutóbb írtunk!
+
+Kicsit körülményes, mert külön el kell indítani a frontend és a backendet.
+
+Hozz létre egy package.json-t a 4_stores-ban (`pnpm init`), és hozz létre benne egy `dev` szkriptet,
+ami párhuzamosan elindítja a frontendet és a backendet! (`&` jellel lehet Bashben)
