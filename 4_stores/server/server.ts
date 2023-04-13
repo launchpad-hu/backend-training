@@ -3,12 +3,13 @@
 
 import express from "express";
 import { remultExpress } from "remult/remult-express";
+import { Participation } from "../shared/entities/Participation";
 import { Volunteer } from "../shared/entities/Volunteer";
 
 const app = express();
 app.use(
   remultExpress({
-    entities: [Volunteer],
+    entities: [Volunteer, Participation],
   })
 );
 

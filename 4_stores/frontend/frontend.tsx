@@ -5,7 +5,7 @@
 import { observer } from "mobx-react-lite";
 import { render } from "react-dom";
 import { Volunteer } from "../shared/entities/Volunteer";
-import "./volunteerStore";
+import "./debug";
 import { volunteerStore } from "./volunteerStore";
 
 const VolunteerList = observer(() => {
@@ -19,6 +19,11 @@ const VolunteerList = observer(() => {
         <li>
           {volunteer.name}-{volunteer.phoneNumber}
           <button onClick={() => handleDelete(volunteer)}>×</button>
+          <ul>
+            {volunteerStore.participationsOf(volunteer).map((participation) => (
+              <li>{participation.date.toLocaleDateString()}</li>
+            ))}
+          </ul>
         </li>
       ))}
     </ul>
