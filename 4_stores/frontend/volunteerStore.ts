@@ -1,24 +1,24 @@
 import { makeAutoObservable } from "mobx";
 import { remult } from "remult";
-import { Participation } from "../shared/entities/Participation";
 import { Volunteer } from "../shared/entities/Volunteer";
-import { ParticipationsStore } from "./participationsStore";
+import use from "../shared/utils/use";
+import { VolunteerInfoStore as VolunteerStore } from "./VolunteerInfoStore";
 
-class VolunteerStore {
-  volunteers: Volunteer[] = [];
-  participationsStores = new Map<Volunteer, ParticipationsStore>();
+class VolunteersStore {
+  participationsStores = new Map<Volunteer, VolunteerStore>();
 
   newVolunteerName = "";
   newVolunteerPhone = "";
 
   constructor() {
     makeAutoObservable(this);
-    remult
-      .repo(Volunteer)
-      .liveQuery()
-      .subscribe((volunteers) => {
-        this.volunteers = volunteers.items;
-      });
+  }
+
+  get volunteers_update$() {
+    return remult.repo(Volunteer).liveQuery();
+  }
+  get volunteers() {
+    return use(this.volunteers_update$).items;
   }
 
   saveNewVolunteer() {
@@ -34,15 +34,15 @@ class VolunteerStore {
     remult.repo(Volunteer).delete(volunteer.id);
   }
 
-  participationsOf(volunteer: Volunteer): Participation[] {
+  volunteerInfo(volunteer: Volunteer) {
     let store = this.participationsStores.get(volunteer);
     if (store === undefined) {
-      store = new ParticipationsStore(volunteer);
+      store = new VolunteerStore(volunteer);
       this.participationsStores.set(volunteer, store);
     }
-    return store.participations;
+    return store;
   }
 }
-export const volunteerStore = new VolunteerStore(); // singleton
-Object.assign(globalThis, { volunteerStore });
+export const volunteersStore = new VolunteersStore(); // singleton
+Object.assign(globalThis, { volunteersStore });
 // globalThis.volunteerStore = volunteerStore

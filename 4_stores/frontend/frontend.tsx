@@ -3,27 +3,41 @@
 //
 
 import { observer } from "mobx-react-lite";
-import { render } from "react-dom";
+import React, { Suspense } from "react";
+import { createRoot } from "react-dom/client";
+
 import { Volunteer } from "../shared/entities/Volunteer";
 import "./debug";
-import { volunteerStore } from "./volunteerStore";
+import { volunteersStore } from "./volunteerStore";
+
+const ParticipationsOfVolunteer = observer(
+  ({ volunteer }: { volunteer: Volunteer }) => {
+    const participations =
+      volunteersStore.volunteerInfo(volunteer).participations;
+    return (
+      <ul>
+        {participations.map((participation) => (
+          <li>{participation.date.toLocaleDateString()}</li>
+        ))}
+      </ul>
+    );
+  }
+);
 
 const VolunteerList = observer(() => {
   const handleDelete = (volunteer: Volunteer) => {
     if (!confirm("Really delete?")) return;
-    volunteerStore.deleteVolunteer(volunteer);
+    volunteersStore.deleteVolunteer(volunteer);
   };
   return (
     <ul>
-      {volunteerStore.volunteers.map((volunteer) => (
+      {volunteersStore.volunteers.map((volunteer) => (
         <li>
           {volunteer.name}-{volunteer.phoneNumber}
           <button onClick={() => handleDelete(volunteer)}>×</button>
-          <ul>
-            {volunteerStore.participationsOf(volunteer).map((participation) => (
-              <li>{participation.date.toLocaleDateString()}</li>
-            ))}
-          </ul>
+          <Suspense fallback={"..."}>
+            <ParticipationsOfVolunteer {...{ volunteer }} />
+          </Suspense>
         </li>
       ))}
     </ul>
@@ -33,26 +47,28 @@ const VolunteerList = observer(() => {
 const App = observer(() => {
   return (
     <div>
-      <VolunteerList />
+      <Suspense fallback="Loading volunteers...">
+        <VolunteerList />
+      </Suspense>
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          volunteerStore.saveNewVolunteer();
+          volunteersStore.saveNewVolunteer();
         }}
       >
         New Volunteer:
         <input
           placeholder="Name"
-          value={volunteerStore.newVolunteerName}
+          value={volunteersStore.newVolunteerName}
           onChange={(e) =>
-            (volunteerStore.newVolunteerName = e.currentTarget.value)
+            (volunteersStore.newVolunteerName = e.currentTarget.value)
           }
         />
         <input
           placeholder="Phone"
-          value={volunteerStore.newVolunteerPhone}
+          value={volunteersStore.newVolunteerPhone}
           onChange={(e) =>
-            (volunteerStore.newVolunteerPhone = e.currentTarget.value)
+            (volunteersStore.newVolunteerPhone = e.currentTarget.value)
           }
         />
         <button type="submit">Save</button>
@@ -60,4 +76,9 @@ const App = observer(() => {
     </div>
   );
 });
-render(<App />, document.getElementById("root"));
+
+createRoot(document.getElementById("root") as HTMLElement).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);

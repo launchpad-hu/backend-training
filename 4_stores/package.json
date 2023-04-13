@@ -13,5 +13,8 @@
   "devDependencies": {
     "concurrently": "^8.0.1",
     "vite": "^4.2.1"
+  },
+  "dependencies": {
+    "mobx-utils": "^6.0.6"
   }
 }
