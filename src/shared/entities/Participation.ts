@@ -15,7 +15,7 @@ export class Participation {
   location!: string;
 
   @Fields.dateOnly()
-  date!: Date;
+  date?: Date;
 
   @Field(() => Volunteer)
   volunteer?: Volunteer;

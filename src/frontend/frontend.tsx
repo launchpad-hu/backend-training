@@ -17,7 +17,10 @@ const ParticipationsOfVolunteer = observer(
     return (
       <ul>
         {participations.map((participation) => (
-          <li>{participation.date.toLocaleDateString()}</li>
+          <li>
+            {participation.date?.toLocaleDateString() ?? "??"} -{" "}
+            {participation.program}
+          </li>
         ))}
       </ul>
     );

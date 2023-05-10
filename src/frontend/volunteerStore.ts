@@ -2,10 +2,10 @@ import { makeAutoObservable } from "mobx";
 import { remult } from "remult";
 import { Volunteer } from "../shared/entities/Volunteer";
 import use from "../shared/utils/use";
-import { VolunteerInfoStore as VolunteerStore } from "./VolunteerInfoStore";
+import { VolunteerInfoStore } from "./VolunteerInfoStore";
 
 class VolunteersStore {
-  participationsStores = new Map<Volunteer, VolunteerStore>();
+  volunteerInfoStores = new Map<Volunteer, VolunteerInfoStore>();
 
   newVolunteerName = "";
   newVolunteerPhone = "";
@@ -35,10 +35,10 @@ class VolunteersStore {
   }
 
   volunteerInfo(volunteer: Volunteer) {
-    let store = this.participationsStores.get(volunteer);
+    let store = this.volunteerInfoStores.get(volunteer);
     if (store === undefined) {
-      store = new VolunteerStore(volunteer);
-      this.participationsStores.set(volunteer, store);
+      store = new VolunteerInfoStore(volunteer);
+      this.volunteerInfoStores.set(volunteer, store);
     }
     return store;
   }

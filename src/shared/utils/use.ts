@@ -7,14 +7,14 @@ export default function use<T>(value: Promise<T> | Subscribable<T>): T {
 
 // ------- Subscribable -------
 
-export type Subscribable<T> = {
+export interface Subscribable<T> {
   subscribe(subscriber: Subscriber<T>): TeardownLogic;
-};
-export type Subscriber<T> = {
+}
+export interface Subscriber<T> {
   next?(value: T): void;
   error?(error: any): void;
   complete?(): void;
-};
+}
 export type TeardownLogic = (() => void) | { unsubscribe(): void } | void;
 
 const DATA = Symbol("DATA");
